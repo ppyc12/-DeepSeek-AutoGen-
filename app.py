@@ -108,6 +108,7 @@ def get_agents(api_key, context_text, pro_identity, con_identity):
     2. Start your argument DIRECTLY.
     3. ONLY generate ONE single turn.
     4. Speak in Chinese.
+    5. At the very end, append a new line with a concise summary: '【核心论点】：<your core argument in one sentence>'.
     """
     
     # 【核心修改】：将用户输入的身份注入到 System Prompt 中

@@ -1,97 +1,112 @@
-# ⚔️ DeepSeek AI 智能辩论系统 (AI Debate Agent)
+# 🧠 AI Deep Debate Engine (AI 深度辩论引擎)
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/ppyc12/-deepseek-autogen-/main/app.py)
 [![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 [![Framework](https://img.shields.io/badge/Framework-AutoGen-green.svg)](https://microsoft.github.io/autogen/)
 [![LLM](https://img.shields.io/badge/Model-DeepSeek%20V3-purple.svg)](https://www.deepseek.com/)
+[![Visualization](https://img.shields.io/badge/Vis-Matplotlib-orange.svg)](https://matplotlib.org/)
 
-> 🎓 **大三“创新实践”课程项目**：探索基于 Large Language Model (LLM) 的多智能体对抗与协作机制。
+> 🎓 **大三“创新实践”课程项目**：基于 AutoGen  与  DeepSeek-V3 的全流程智能辩论与评估系统。
 
 ## 📖 项目简介
 
-**DeepSeek AI Debate Agent** 是一个可视化的多智能体辩论系统。本项目基于 **Microsoft AutoGen** 框架开发，利用 **DeepSeek-V3** 大模型的强大逻辑推理能力，实现了两个 AI 辩手（正方与反方）围绕用户给定议题进行自动化的、多轮次的逻辑对抗。
+**AI Deep Debate Engine** 是一个专业级的多智能体辩论系统。不同于普通的对话机器人，本项目构建了一个完整的“辩论场域”：
+它不仅包含持不同立场的 **AI 辩手**，还引入了 **RAG (检索增强生成)** 技术让辩论基于真实文档，拥有 **人类介入机制 (Human-in-the-loop)** 允许实时战术干预，并在辩论结束后由 **AI 首席裁判** 进行多维度评分与可视化复盘。
 
-通过本项目，旨在展示 **Multi-Agent System (MAS)** 在处理复杂逻辑任务、观点生成及自动化交互方面的潜力。
+## ✨ 核心功能亮点 (已实现)
 
-## ✨ 主要功能
+### 1. 🎭 沉浸式辩论与动态角色
+* **自定义人设**：支持用户动态定义正反方身份（例如：“资深技术专家” vs “AI 伦理学家”），系统会将人设注入到 Agent 的底层逻辑中。
+* **打字机特效**：模拟真实发言节奏，提供流畅的流式阅读体验。
 
-* **🎭 沉浸式辩论体验**：自动构建“正方”、“反方”与“主持人”三个智能体角色。
-* **🧠 深度逻辑对抗**：由 DeepSeek-V3 驱动，AI 辩手能够针对对方观点进行实时反驳与论证。
-* **⚡ 简洁交互界面**：基于 Streamlit 构建 Web UI，支持自定义辩论轮数与辩题。
-* **🚀 灵活配置**：
-    * **快速模式**：直接在网页侧边栏输入 API Key 即可使用，无需配置环境变量。
-    * **安全模式**：支持 Streamlit Secrets 云端配置，实现无感登录。
+### 2. 🧠 RAG 文档驱动 (知识库)
+* **PDF 解析**：集成 `PyPDF2`，支持上传 PDF 论文或资料。
+* **智能摘要**：AI 自动阅读长文档并提炼核心论点，作为辩手们的“赛前准备资料”，确保辩论言之有物。
+
+### 3. 📩 战术指挥台 (Human-in-the-loop)
+* **实时干预**：独创的“递纸条”功能。用户可以在辩论进行中，给下一位发言者发送秘密指令（例如：“攻击对方的数据漏洞”），实时引导辩论走向。
+* **手动/自动控制**：通过“战术指挥台”逐步推进辩论轮次，掌控全场节奏。
+
+### 4. 🏆 AI 裁判与可视化评分
+* **多维度量化**：辩论结束后，**Analyst Agent** 会回溯全场，从 **逻辑 (Logic)**、**证据 (Evidence)**、**表达 (Expression)** 三个维度进行打分。
+* **雷达图展示**：使用 `Matplotlib` 实时绘制正反方能力对比雷达图，直观展示胜负关键。
+* **胜负裁决**：输出最终获胜方及详细的胜负原因点评。
 
 ## 📸 系统演示
 
-![系统运行截图](https://via.placeholder.com/800x450?text=Please+Upload+App+Screenshot+Here)
+> [!NOTE]
+> 请点击下方链接观看高清演示。
+
+[![观看演示视频](https://i0.hdslb.com/bfs/archive/你的封面图地址.jpg)](https://github.com/user-attachments/assets/781c21de-3a76-4f6f-b6d8-60d554992d85)
 
 ## 🛠️ 技术栈
 
-| 组件 | 说明 |
-| :--- | :--- |
-| **Frontend** | [Streamlit](https://streamlit.io/) (Web 交互界面) |
-| **Agent Framework** | [PyAutoGen](https://microsoft.github.io/autogen/) (多智能体编排) |
-| **LLM Kernel** | [DeepSeek API](https://www.deepseek.com/) (核心推理引擎) |
-| **Environment** | Python 3.11 |
+| 模块 | 技术选型 | 说明 |
+| :--- | :--- | :--- |
+| **Frontend** | [Streamlit](https://streamlit.io/) | 使用了 `@st.fragment` 实现高性能局部刷新 |
+| **Orchestration** | [Microsoft AutoGen](https://microsoft.github.io/autogen/) | 多智能体编排与状态管理 |
+| **Intelligence** | [DeepSeek API](https://www.deepseek.com/) | 核心推理引擎 (V3 model) |
+| **Data Vis** | [Matplotlib](https://matplotlib.org/) | 绘制评分雷达图 |
+| **RAG** | [PyPDF2](https://pypi.org/project/PyPDF2/) | 文档解析与上下文注入 |
 
-## 🚀 快速开始 (本地运行)
+## 🚀 快速开始
 
-如果你想在本地机器上运行此项目，请按照以下步骤操作：
-
-### 1. 克隆仓库
+### 1. 环境准备
+推荐使用 Conda 或 venv：
 ```bash
-git clone [https://github.com/ppyc12/-DeepSeek-AutoGen-.git](https://github.com/ppyc12/-DeepSeek-AutoGen-.git)
-cd -DeepSeek-AutoGen-
-2. 创建环境
-Bash
-
-# Windows
 python -m venv venv
+# Windows:
 .\venv\Scripts\activate
-
-# Mac/Linux
-python3 -m venv venv
+# Mac/Linux:
 source venv/bin/activate
-3. 安装依赖
-Bash
+```
 
-pip install -r requirements.txt
-4. 启动应用
-Bash
+### 2. 安装依赖
+```bash
+pip install streamlit pyautogen matplotlib numpy PyPDF2
+```
 
+### 3. 运行系统
+```bash
 streamlit run app.py
-⚙️ API Key 配置说明
-本项目支持两种配置方式，任选其一：
+```
 
-方式 A：网页端直接输入 (推荐首次测试)
+## 📖 操作手册
 
-运行应用后，在网页侧边栏或主界面的输入框中直接粘贴你的 DeepSeek API Key。
+1.  **赛前准备**：
+    * 在侧边栏输入 **DeepSeek API Key**。
+    * (可选) 上传 PDF 参考资料，系统会自动生成摘要。
+2.  **设定会议**：
+    * 输入辩论议题（如“AI 是否会取代程序员？”）。
+    * 定义正方与反方的具体身份。
+    * 点击 **“🔥 开启圆桌会议”**。
+3.  **战术指挥**：
+    * 系统会自动显示下一位发言方。
+    * 你可以在输入框中填写 **“锦囊指令”**，点击执行按钮，AI 会结合你的指令进行发言。
+4.  **最终裁决**：
+    * 辩论轮次结束后，点击 **“⚖️ 请求裁判裁决”**。
+    * 系统将生成胜负判定书及能力对比雷达图。
 
-Key 仅在当前会话有效，刷新页面后需重新输入，不会保存在服务器。
+## 📂 项目结构
 
-方式 B：云端配置 (推荐部署后使用) 如果你部署在 Streamlit Community Cloud：
+```text
+DeepSeek-Debate-Engine/
+├── app.py                # 核心主程序 (包含 UI、Agent 逻辑、绘图代码)
+├── requirements.txt      # 项目依赖
+├── README.md             # 说明文档
+└── .gitignore            # Git 配置
+```
 
-进入 App Settings -> Secrets。
+## 🔮 未来规划 (Roadmap)
 
-添加以下内容：
+* [ ] **导出报告**：将辩论全过程及评分图表导出为 PDF/Markdown 报告。
+* [ ] **语音对战**：接入 TTS/STT，实现语音实时辩论。
+* [ ] **多方混战**：从 1v1 升级为多方圆桌会议模式。
 
-Ini, TOML
+## 🤝 致谢
 
-DEEPSEEK_API_KEY = "sk-你的密钥xxxxxxxxxxxxxxxx"
-保存后，应用将自动读取 Key，无需手动输入。
+* 感谢 **DeepSeek** 提供的高性价比大模型 API。
+* 感谢 **Microsoft AutoGen** 社区提供的 Agent 设计思路。
 
-📂 项目结构
-Plaintext
-
--DeepSeek-AutoGen-/
-├── app.py                # 核心代码：Streamlit 界面与 AutoGen 逻辑
-├── requirements.txt      # 依赖包列表 (streamlit, pyautogen, etc.)
-├── README.md             # 项目说明文档
-└── .gitignore            # Git 忽略配置
-🤝 致谢与引用
-感谢 DeepSeek 提供的高性价比大模型 API。
-
-感谢 Microsoft AutoGen 团队提供的优秀的 Agent 框架。
-
-Created by [你的名字] | 计算机科学与技术专业 | 2025
+---
+*Created by [ppyc12] | 2025 Innovation Practice Project*
