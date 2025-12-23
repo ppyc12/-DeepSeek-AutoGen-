@@ -1,6 +1,6 @@
 streamlit
-pyautogen>=0.4.0
+pyautogen==0.2.35
+numpy<2.0.0
 matplotlib
-numpy
 PyPDF2
 #
